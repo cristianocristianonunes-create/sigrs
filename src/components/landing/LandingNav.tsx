@@ -33,7 +33,7 @@ export function LandingNav() {
               {l.label}
             </a>
           ))}
-          <Link to="/dashboard" className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+          <Link to="/perfil" className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2 rounded-lg hover:bg-primary/90 transition-colors">
             Acessar Plataforma
           </Link>
         </div>
@@ -57,7 +57,7 @@ export function LandingNav() {
                   {l.label}
                 </a>
               ))}
-              <Link to="/dashboard" className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-center mt-2">
+              <Link to="/perfil" className="text-sm font-medium bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-center mt-2">
                 Acessar Plataforma
               </Link>
             </div>

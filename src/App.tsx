@@ -4,8 +4,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DemoModeProvider } from "@/contexts/DemoModeContext";
+import { PerfilProvider } from "@/contexts/PerfilContext";
 import { Layout } from "@/components/Layout";
 import Landing from "./pages/Landing";
+import PerfilAcesso from "./pages/PerfilAcesso";
 import Dashboard from "./pages/Dashboard";
 import DashboardOperacional from "./pages/DashboardOperacional";
 import Simulator from "./pages/Simulator";
@@ -28,6 +30,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <DemoModeProvider>
+    <PerfilProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -35,6 +38,7 @@ const App = () => (
         <Routes>
           {/* Landing page — no sidebar */}
           <Route path="/" element={<Landing />} />
+          <Route path="/perfil" element={<PerfilAcesso />} />
 
           {/* Platform pages — with sidebar layout */}
           <Route element={<Layout><Dashboard /></Layout>} path="/dashboard" />
@@ -56,6 +60,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </PerfilProvider>
     </DemoModeProvider>
   </QueryClientProvider>
 );

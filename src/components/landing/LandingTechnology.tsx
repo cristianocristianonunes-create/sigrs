@@ -42,7 +42,7 @@ export function LandingTechnology() {
         </div>
 
         <motion.div {...fade} className="text-center">
-          <Link to="/dashboard"
+          <Link to="/perfil"
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-7 py-3 rounded-xl hover:bg-primary/90 transition-colors"
           >
             Explorar a plataforma

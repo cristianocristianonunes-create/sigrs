@@ -14,9 +14,10 @@ import {
   FileText,
   Recycle,
   Activity,
+  LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -27,8 +28,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
+  SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { usePerfil } from "@/contexts/PerfilContext";
 
 const simulationItems = [
   { title: "Dashboard Executivo", url: "/dashboard", icon: LayoutDashboard },
@@ -56,6 +59,13 @@ const reportItems = [
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
+  const { perfil, setPerfil } = usePerfil();
+  const navigate = useNavigate();
+
+  const handleTrocarPerfil = () => {
+    setPerfil(null);
+    navigate("/perfil");
+  };
 
   const renderGroup = (label: string, items: typeof simulationItems, color?: string) => (
     <SidebarGroup>
@@ -87,10 +97,12 @@ export function AppSidebar() {
     </SidebarGroup>
   );
 
+  const homeUrl = perfil === "operacional" ? "/operacional" : "/dashboard";
+
   return (
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
-        <Link to="/dashboard" className="flex items-center gap-2 cursor-pointer group">
+        <Link to={homeUrl} className="flex items-center gap-2 cursor-pointer group">
           <div className="h-8 w-8 rounded-lg gradient-success flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
             <Recycle className="h-5 w-5 text-sidebar-foreground" />
           </div>
@@ -103,10 +115,32 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        {renderGroup("Simulação / Decisão", simulationItems, "bg-primary-foreground")}
-        {renderGroup("Operação Real", operationItems, "bg-green-400")}
-        {renderGroup("Relatório", reportItems)}
+        {perfil === "executivo" && (
+          <>
+            {renderGroup("Simulação / Decisão", simulationItems, "bg-primary-foreground")}
+            {renderGroup("Relatório", reportItems)}
+          </>
+        )}
+        {perfil === "operacional" && (
+          renderGroup("Operação Real", operationItems, "bg-green-400")
+        )}
+        {!perfil && (
+          <>
+            {renderGroup("Simulação / Decisão", simulationItems, "bg-primary-foreground")}
+            {renderGroup("Operação Real", operationItems, "bg-green-400")}
+            {renderGroup("Relatório", reportItems)}
+          </>
+        )}
       </SidebarContent>
+      <SidebarFooter className="p-4">
+        <button
+          onClick={handleTrocarPerfil}
+          className="flex items-center gap-2 text-sidebar-foreground/50 hover:text-sidebar-foreground/90 transition-colors text-xs w-full"
+        >
+          <LogOut className="h-4 w-4 shrink-0" />
+          {!collapsed && <span>Trocar perfil</span>}
+        </button>
+      </SidebarFooter>
     </Sidebar>
   );
 }
