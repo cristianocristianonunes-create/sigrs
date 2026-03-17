@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, MessageCircle, Mail, Shield, Clock, UserCheck } from "lucide-react";
+import { Send, MessageCircle, Shield, Clock, UserCheck, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+
+// Formspree: acesse formspree.io, crie um formulário com o e-mail de destino
+// e substitua o ID abaixo pelo ID gerado (ex: "xrgwopkj")
+const FORMSPREE_ID = "SEU_FORM_ID_AQUI";
 
 const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" } };
 
@@ -26,7 +30,10 @@ const interesses = [
 export function LandingContact() {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [cargoValue, setCargoValue] = useState("");
+  const [estadoValue, setEstadoValue] = useState("");
 
   const toggleInterest = (interest: string) => {
     setSelectedInterests(prev =>
@@ -34,41 +41,54 @@ export function LandingContact() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const nome = data.get("nome") as string;
     const email = data.get("email") as string;
     const municipio = data.get("municipio") as string;
-    const estado = data.get("estado") as string;
-    const populacao = data.get("populacao") as string;
-    const telefone = data.get("telefone") as string;
-    const cargo = data.get("cargo") as string;
-    const situacao = data.get("situacao") as string;
 
     if (!nome?.trim() || !email?.trim() || !municipio?.trim()) {
       toast({ title: "Preencha todos os campos obrigatórios", variant: "destructive" });
       return;
     }
 
-    const interestList = selectedInterests.length > 0 ? selectedInterests.join(", ") : "Não informado";
+    setLoading(true);
 
-    const subject = encodeURIComponent(`SIGRS — Proposta para ${municipio}/${estado}`);
-    const body = encodeURIComponent(
-      `Nova solicitação de proposta recebida pelo site SIGRS.\n\n` +
-      `Nome: ${nome}\n` +
-      `Cargo: ${cargo || "Não informado"}\n` +
-      `Município: ${municipio} / ${estado}\n` +
-      `População: ${populacao ? Number(populacao).toLocaleString("pt-BR") + " habitantes" : "Não informado"}\n` +
-      `Telefone/WhatsApp: ${telefone}\n` +
-      `E-mail: ${email}\n` +
-      `Interesses: ${interestList}\n\n` +
-      `Situação atual:\n${situacao || "Não informada"}`
-    );
+    const payload = {
+      nome,
+      cargo: cargoValue || "Não informado",
+      municipio,
+      estado: estadoValue || "Não informado",
+      populacao: data.get("populacao") as string,
+      telefone: data.get("telefone") as string,
+      email,
+      interesses: selectedInterests.join(", ") || "Não informado",
+      situacao: data.get("situacao") as string || "Não informada",
+    };
 
-    window.location.href = `mailto:contato@sigrs.com.br?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        throw new Error("Erro no envio");
+      }
+    } catch {
+      toast({
+        title: "Erro ao enviar",
+        description: "Tente novamente ou entre em contato diretamente pelo WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -99,7 +119,7 @@ export function LandingContact() {
             </div>
             <h3 className="text-2xl font-bold text-foreground mb-3">Proposta solicitada!</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Recebemos suas informações. Nossa equipe irá analisar o potencial do seu município e entrar em contato com uma proposta personalizada.
+              Recebemos suas informações. Nossa equipe irá analisar o potencial do seu município e entrar em contato em breve com uma proposta personalizada.
             </p>
           </motion.div>
         ) : (
@@ -113,7 +133,7 @@ export function LandingContact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="cargo">Cargo *</Label>
-                  <Select name="cargo" required>
+                  <Select value={cargoValue} onValueChange={setCargoValue} required>
                     <SelectTrigger id="cargo"><SelectValue placeholder="Selecione" /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="prefeito">Prefeito(a)</SelectItem>
@@ -132,7 +152,7 @@ export function LandingContact() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="estado">Estado *</Label>
-                  <Select name="estado" required>
+                  <Select value={estadoValue} onValueChange={setEstadoValue} required>
                     <SelectTrigger id="estado"><SelectValue placeholder="UF" /></SelectTrigger>
                     <SelectContent>
                       {estados.map(uf => <SelectItem key={uf} value={uf}>{uf}</SelectItem>)}
@@ -184,9 +204,16 @@ export function LandingContact() {
                 </div>
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-success text-success-foreground hover:bg-success/90 text-base font-semibold h-12 rounded-xl shadow-lg shadow-success/20">
-                <Send className="h-4 w-4 mr-2" />
-                Quero receber a proposta para minha cidade
+              <Button
+                type="submit"
+                size="lg"
+                disabled={loading}
+                className="w-full bg-success text-success-foreground hover:bg-success/90 text-base font-semibold h-12 rounded-xl shadow-lg shadow-success/20"
+              >
+                {loading
+                  ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Enviando...</>
+                  : <><Send className="h-4 w-4 mr-2" /> Quero receber a proposta para minha cidade</>
+                }
               </Button>
 
               <div className="flex flex-wrap justify-center gap-6 pt-2 text-sm text-muted-foreground">
@@ -213,17 +240,7 @@ export function LandingContact() {
                     <MessageCircle className="h-5 w-5 text-success" />
                     <div>
                       <p className="text-sm font-semibold text-foreground">WhatsApp</p>
-                      <p className="text-xs text-muted-foreground">Resposta rápida</p>
-                    </div>
-                  </a>
-                  <a
-                    href="mailto:contato@sigrs.com.br"
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 hover:bg-primary/20 transition-colors"
-                  >
-                    <Mail className="h-5 w-5 text-primary" />
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">E-mail</p>
-                      <p className="text-xs text-muted-foreground">contato@sigrs.com.br</p>
+                      <p className="text-xs text-muted-foreground">Moreira Lima Associados</p>
                     </div>
                   </a>
                 </div>

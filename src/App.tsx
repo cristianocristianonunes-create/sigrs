@@ -23,6 +23,9 @@ import Control from "./pages/Control";
 import Implementation from "./pages/Implementation";
 import Training from "./pages/Training";
 import Report from "./pages/Report";
+import EducacaoAmbiental from "./pages/EducacaoAmbiental";
+import Cooperativa from "./pages/Cooperativa";
+import Transparencia from "./pages/Transparencia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +59,9 @@ const App = () => (
           <Route element={<Layout><Implementation /></Layout>} path="/implantacao" />
           <Route element={<Layout><Training /></Layout>} path="/treinamento" />
           <Route element={<Layout><Report /></Layout>} path="/relatorio" />
+          <Route element={<Layout><EducacaoAmbiental /></Layout>} path="/educacao" />
+          <Route element={<Layout><Cooperativa /></Layout>} path="/cooperativa" />
+          <Route element={<Layout><Transparencia /></Layout>} path="/transparencia" />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

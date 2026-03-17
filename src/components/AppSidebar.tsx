@@ -15,6 +15,9 @@ import {
   Recycle,
   Activity,
   LogOut,
+  BookOpen,
+  Handshake,
+  Eye,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { Link, useNavigate } from "react-router-dom";
@@ -49,11 +52,14 @@ const operationItems = [
   { title: "Cronograma", url: "/cronograma", icon: Clock },
   { title: "Implantação", url: "/implantacao", icon: Settings },
   { title: "Treinamento", url: "/treinamento", icon: GraduationCap },
+  { title: "Educação Ambiental", url: "/educacao", icon: BookOpen },
+  { title: "Cooperativa", url: "/cooperativa", icon: Handshake },
 ];
 
 const reportItems = [
   { title: "Fontes de Receita", url: "/receitas", icon: DollarSign },
   { title: "Relatório Executivo", url: "/relatorio", icon: FileText },
+  { title: "Transparência", url: "/transparencia", icon: Eye },
 ];
 
 export function AppSidebar() {
