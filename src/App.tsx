@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/Layout";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
+import DashboardOperacional from "./pages/DashboardOperacional";
 import Simulator from "./pages/Simulator";
 import BeforeAfter from "./pages/BeforeAfter";
 import Infrastructure from "./pages/Infrastructure";
@@ -35,6 +36,7 @@ const App = () => (
 
           {/* Platform pages — with sidebar layout */}
           <Route element={<Layout><Dashboard /></Layout>} path="/dashboard" />
+          <Route element={<Layout><DashboardOperacional /></Layout>} path="/operacional" />
           <Route element={<Layout><Simulator /></Layout>} path="/simulador" />
           <Route element={<Layout><BeforeAfter /></Layout>} path="/comparativo" />
           <Route element={<Layout><Infrastructure /></Layout>} path="/infraestrutura" />
