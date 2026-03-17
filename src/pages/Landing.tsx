@@ -13,6 +13,7 @@ import { LandingTraining } from "@/components/landing/LandingTraining";
 import { LandingInfrastructure } from "@/components/landing/LandingInfrastructure";
 import { LandingFAQ } from "@/components/landing/LandingFAQ";
 import { LandingCTA } from "@/components/landing/LandingCTA";
+import { LandingContact } from "@/components/landing/LandingContact";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 
 export default function Landing() {
@@ -33,6 +34,7 @@ export default function Landing() {
       <LandingInfrastructure />
       <LandingFAQ />
       <LandingCTA />
+      <LandingContact />
       <LandingFooter />
     </div>
   );
