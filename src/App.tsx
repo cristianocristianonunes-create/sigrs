@@ -36,6 +36,7 @@ const App = () => (
 
           {/* Platform pages — with sidebar layout */}
           <Route element={<Layout><Dashboard /></Layout>} path="/dashboard" />
+          <Route element={<Layout><DashboardOperacional /></Layout>} path="/operacional" />
           <Route element={<Layout><Simulator /></Layout>} path="/simulador" />
           <Route element={<Layout><BeforeAfter /></Layout>} path="/comparativo" />
           <Route element={<Layout><Infrastructure /></Layout>} path="/infraestrutura" />
