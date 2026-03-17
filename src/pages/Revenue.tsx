@@ -6,10 +6,10 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 const fade = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 
 const sources = [
-  { name: "Recicláveis", value: 1200000, desc: "Alumínio, plástico, papel, vidro, metais", icon: Recycle, color: "text-primary", bg: "bg-primary/10", fill: "#1E40AF" },
-  { name: "Composto Orgânico", value: 600000, desc: "Fertilizante orgânico para agricultura local", icon: Leaf, color: "text-success", bg: "bg-success/10", fill: "#10B981" },
-  { name: "Economia com Aterro", value: 700000, desc: "Redução de 65% no volume destinado", icon: Trash2, color: "text-foreground", bg: "bg-muted", fill: "#64748B" },
-  { name: "Outros Ganhos", value: 200000, desc: "Créditos de carbono, CDR, parcerias", icon: DollarSign, color: "text-primary", bg: "bg-primary/10", fill: "#3B82F6" },
+  { name: "Recicláveis", value: 1450000, desc: "Alumínio, plástico, papel, vidro, metais", icon: Recycle, color: "text-primary", bg: "bg-primary/10", fill: "#1E40AF" },
+  { name: "Economia com Aterro", value: 930000, desc: "Redução de 70% no volume destinado ao aterro", icon: Trash2, color: "text-foreground", bg: "bg-muted", fill: "#64748B" },
+  { name: "Outros Ganhos", value: 280000, desc: "Créditos de carbono, logística reversa, energia solar", icon: DollarSign, color: "text-primary", bg: "bg-primary/10", fill: "#3B82F6" },
+  { name: "Composto Orgânico", value: 110000, desc: "Fertilizante vendido para agricultores e paisagismo", icon: Leaf, color: "text-success", bg: "bg-success/10", fill: "#10B981" },
 ];
 
 const chartData = sources.map(s => ({ name: s.name, valor: s.value, fill: s.fill }));
@@ -36,7 +36,12 @@ export default function Revenue() {
                   <div className="flex-1">
                     <p className="font-semibold text-sm">{s.name}</p>
                     <p className="text-xs text-muted-foreground mb-2">{s.desc}</p>
-                    <p className="text-xl font-bold text-success">R$ {(s.value/1e6).toFixed(1)}M<span className="text-xs font-normal text-muted-foreground">/ano</span></p>
+                    <p className="text-xl font-bold text-success">
+                      {s.value >= 1000000
+                        ? `R$ ${(s.value/1e6).toFixed(2)}M`
+                        : `R$ ${(s.value/1e3).toFixed(0)} mil`}
+                      <span className="text-xs font-normal text-muted-foreground">/ano</span>
+                    </p>
                   </div>
                 </div>
               </CardContent>

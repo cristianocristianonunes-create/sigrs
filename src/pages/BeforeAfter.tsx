@@ -7,11 +7,11 @@ const fade = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
 const rows = [
   { item: "Custo com coleta/destinação", before: "R$ 3,2M/ano", after: "R$ 1,4M/ano", improved: true },
   { item: "Receita com resíduos", before: "R$ 0", after: "R$ 2,7M/ano", improved: true },
-  { item: "Taxa de reciclagem", before: "3–5%", after: "55–65%", improved: true },
+  { item: "Taxa de reciclagem", before: "3–5%", after: "≥ 30% (meta Ano 3)", improved: true },
   { item: "Controle operacional", before: "Manual / nenhum", after: "Sistema integrado", improved: true },
   { item: "Destinação em aterro", before: "90–95%", after: "30–35%", improved: true },
   { item: "Emissão de CO₂", before: "Alta", after: "Reduzida em ~60%", improved: true },
-  { item: "Geração de empregos", before: "Informal", after: "85+ formais", improved: true },
+  { item: "Geração de empregos", before: "Informal", after: "50–80 formais", improved: true },
   { item: "Vida útil do aterro", before: "Esgotando", after: "Estendida 3–5x", improved: true },
   { item: "Transparência", before: "Baixa", after: "Total via dashboard", improved: true },
   { item: "Educação ambiental", before: "Pontual", after: "Programa contínuo", improved: true },

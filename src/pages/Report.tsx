@@ -1,9 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { FileText, DollarSign, Leaf, Users, CheckCircle2, Download } from "lucide-react";
+import { FileText, DollarSign, Leaf, Users, CheckCircle2, Printer } from "lucide-react";
 
 const fade = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
+
+const handlePrint = () => {
+  window.print();
+};
 
 export default function Report() {
   return (
@@ -21,8 +25,8 @@ export default function Report() {
             <p className="text-sm opacity-80 mb-6 max-w-md mx-auto">
               Receba um relatório executivo personalizado com análise financeira, impacto ambiental e social, e estudo de viabilidade.
             </p>
-            <Button size="lg" variant="secondary" className="font-semibold">
-              <Download className="h-4 w-4 mr-2" /> Gerar Relatório Executivo
+            <Button size="lg" variant="secondary" className="font-semibold" onClick={handlePrint}>
+              <Printer className="h-4 w-4 mr-2" /> Imprimir / Salvar como PDF
             </Button>
           </CardContent>
         </Card>
@@ -30,9 +34,9 @@ export default function Report() {
 
       <div className="grid sm:grid-cols-2 gap-4">
         {[
-          { title: "Resumo Financeiro", icon: DollarSign, items: ["CAPEX: R$ 4,7M", "OPEX: R$ 173 mil/mês", "Receita: R$ 2,7M/ano", "Payback: ~3,5 anos"] },
-          { title: "Impacto Ambiental", icon: Leaf, items: ["65% redução de aterro", "1.200 ton CO₂ evitadas/ano", "62% taxa de reciclagem", "Vida útil do aterro 3–5x maior"] },
-          { title: "Impacto Social", icon: Users, items: ["85+ empregos diretos", "Capacitação profissional", "Educação ambiental contínua", "Melhoria da saúde pública"] },
+          { title: "Resumo Financeiro", icon: DollarSign, items: ["CAPEX: R$ 4,7M", "OPEX: R$ 173 mil/mês", "Receita: R$ 2,7M/ano", "Payback: ~4,8 anos"] },
+          { title: "Impacto Ambiental", icon: Leaf, items: ["65% redução de aterro", "500–800 ton CO₂ evitadas/ano", "≥ 30% taxa de reciclagem (Ano 3)", "Vida útil do aterro 3–5x maior"] },
+          { title: "Impacto Social", icon: Users, items: ["50–80 empregos diretos", "50–70 catadores formalizados", "Educação ambiental contínua", "Melhoria da saúde pública"] },
           { title: "Viabilidade", icon: CheckCircle2, items: ["Modelo comprovado", "Implantação em 90 dias", "Suporte completo", "Risco controlado"] },
         ].map((section, i) => (
           <motion.div key={section.title} {...fade} transition={{ delay: 0.2 + i * 0.05 }}>

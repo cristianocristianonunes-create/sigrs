@@ -23,8 +23,8 @@ const metrics = [
   { label: "Economia Potencial", value: 1800000, prefix: "R$ ", icon: TrendingDown, variant: "success" as const },
   { label: "Receita Potencial", value: 2700000, prefix: "R$ ", icon: DollarSign, variant: "success" as const },
   { label: "Redução de Aterro", value: 65, suffix: "%", icon: TrendingUp, variant: "success" as const },
-  { label: "CO₂ Evitado", value: 1200, suffix: " ton/ano", icon: Leaf, variant: "success" as const },
-  { label: "Empregos Gerados", value: 85, icon: Users, variant: "primary" as const },
+  { label: "CO₂ Evitado", value: 650, suffix: " ton/ano", icon: Leaf, variant: "success" as const },
+  { label: "Empregos Gerados", value: 65, icon: Users, variant: "primary" as const },
 ];
 
 export default function Dashboard() {

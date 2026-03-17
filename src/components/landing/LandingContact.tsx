@@ -41,12 +41,33 @@ export function LandingContact() {
     const nome = data.get("nome") as string;
     const email = data.get("email") as string;
     const municipio = data.get("municipio") as string;
+    const estado = data.get("estado") as string;
+    const populacao = data.get("populacao") as string;
+    const telefone = data.get("telefone") as string;
+    const cargo = data.get("cargo") as string;
+    const situacao = data.get("situacao") as string;
 
     if (!nome?.trim() || !email?.trim() || !municipio?.trim()) {
       toast({ title: "Preencha todos os campos obrigatórios", variant: "destructive" });
       return;
     }
 
+    const interestList = selectedInterests.length > 0 ? selectedInterests.join(", ") : "Não informado";
+
+    const subject = encodeURIComponent(`SIGRS — Proposta para ${municipio}/${estado}`);
+    const body = encodeURIComponent(
+      `Nova solicitação de proposta recebida pelo site SIGRS.\n\n` +
+      `Nome: ${nome}\n` +
+      `Cargo: ${cargo || "Não informado"}\n` +
+      `Município: ${municipio} / ${estado}\n` +
+      `População: ${populacao ? Number(populacao).toLocaleString("pt-BR") + " habitantes" : "Não informado"}\n` +
+      `Telefone/WhatsApp: ${telefone}\n` +
+      `E-mail: ${email}\n` +
+      `Interesses: ${interestList}\n\n` +
+      `Situação atual:\n${situacao || "Não informada"}`
+    );
+
+    window.location.href = `mailto:contato@sigrs.com.br?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
