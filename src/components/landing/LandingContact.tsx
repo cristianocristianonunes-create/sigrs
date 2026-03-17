@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 
 // Formspree: acesse formspree.io, crie um formulário com o e-mail de destino
 // e substitua o ID abaixo pelo ID gerado (ex: "xrgwopkj")
+// Email de destino: luciano@moreiralimaassociados.com.br
 const FORMSPREE_ID = "SEU_FORM_ID_AQUI";
 
 const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" } };
