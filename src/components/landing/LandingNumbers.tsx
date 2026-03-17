@@ -5,9 +5,9 @@ const stats = [
   { value: 70, prefix: "", suffix: "%", label: "menos resíduos no aterro" },
   { value: 930, prefix: "R$ ", suffix: " mil/ano", label: "economia com aterro" },
   { value: 2.7, prefix: "R$ ", suffix: "M/ano", label: "potencial de receita" },
-  { value: 80, prefix: "", suffix: "+", label: "empregos diretos" },
-  { value: 70, prefix: "", suffix: "+", label: "catadores formalizados" },
-  { value: 800, prefix: "", suffix: " ton", label: "CO₂ evitado por ano" },
+  { value: 65, prefix: "", suffix: " pessoas", label: "empregos diretos gerados" },
+  { value: 60, prefix: "", suffix: " catadores", label: "formalizados em cooperativa" },
+  { value: 650, prefix: "", suffix: " ton", label: "CO₂ evitado por ano" },
 ];
 
 const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-60px" } };
