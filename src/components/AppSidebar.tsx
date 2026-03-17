@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Dashboard Executivo", url: "/", icon: LayoutDashboard },
+  { title: "Dashboard Executivo", url: "/dashboard", icon: LayoutDashboard },
   { title: "Simulador", url: "/simulador", icon: Calculator },
   { title: "Antes vs Depois", url: "/comparativo", icon: ArrowLeftRight },
   { title: "Infraestrutura", url: "/infraestrutura", icon: Factory },
