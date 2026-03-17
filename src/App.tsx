@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/Layout";
+import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Simulator from "./pages/Simulator";
 import BeforeAfter from "./pages/BeforeAfter";
@@ -28,24 +29,27 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/simulador" element={<Simulator />} />
-            <Route path="/comparativo" element={<BeforeAfter />} />
-            <Route path="/infraestrutura" element={<Infrastructure />} />
-            <Route path="/operacao" element={<Operations />} />
-            <Route path="/receitas" element={<Revenue />} />
-            <Route path="/kpis" element={<KPIs />} />
-            <Route path="/resultados" element={<Results90 />} />
-            <Route path="/seguranca" element={<Security />} />
-            <Route path="/cronograma" element={<Timeline />} />
-            <Route path="/implantacao" element={<Implementation />} />
-            <Route path="/treinamento" element={<Training />} />
-            <Route path="/relatorio" element={<Report />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Landing page — no sidebar */}
+          <Route path="/" element={<Landing />} />
+
+          {/* Platform pages — with sidebar layout */}
+          <Route element={<Layout><Dashboard /></Layout>} path="/dashboard" />
+          <Route element={<Layout><Simulator /></Layout>} path="/simulador" />
+          <Route element={<Layout><BeforeAfter /></Layout>} path="/comparativo" />
+          <Route element={<Layout><Infrastructure /></Layout>} path="/infraestrutura" />
+          <Route element={<Layout><Operations /></Layout>} path="/operacao" />
+          <Route element={<Layout><Revenue /></Layout>} path="/receitas" />
+          <Route element={<Layout><KPIs /></Layout>} path="/kpis" />
+          <Route element={<Layout><Results90 /></Layout>} path="/resultados" />
+          <Route element={<Layout><Security /></Layout>} path="/seguranca" />
+          <Route element={<Layout><Timeline /></Layout>} path="/cronograma" />
+          <Route element={<Layout><Control /></Layout>} path="/controle" />
+          <Route element={<Layout><Implementation /></Layout>} path="/implantacao" />
+          <Route element={<Layout><Training /></Layout>} path="/treinamento" />
+          <Route element={<Layout><Report /></Layout>} path="/relatorio" />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
