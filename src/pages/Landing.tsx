@@ -34,6 +34,7 @@ export default function Landing() {
       <LandingInfrastructure />
       <LandingFAQ />
       <LandingCTA />
+      <LandingContact />
       <LandingFooter />
     </div>
   );
