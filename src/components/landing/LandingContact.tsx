@@ -232,7 +232,7 @@ export function LandingContact() {
                 </p>
                 <div className="space-y-3">
                   <a
-                    href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20SIGRS"
+                    href="https://wa.me/5561992025579?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20SIGRS"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[hsl(142_70%_45%)]/10 border border-[hsl(142_70%_45%)]/20 hover:bg-[hsl(142_70%_45%)]/20 transition-colors"
