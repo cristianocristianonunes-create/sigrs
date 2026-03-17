@@ -240,7 +240,7 @@ export function LandingContact() {
                     <MessageCircle className="h-5 w-5 text-success" />
                     <div>
                       <p className="text-sm font-semibold text-foreground">WhatsApp</p>
-                      <p className="text-xs text-muted-foreground">Moreira Lima Associados</p>
+                      <p className="text-xs text-muted-foreground">Resposta rápida</p>
                     </div>
                   </a>
                 </div>
