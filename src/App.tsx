@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/Layout";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
+import DashboardOperacional from "./pages/DashboardOperacional";
 import Simulator from "./pages/Simulator";
 import BeforeAfter from "./pages/BeforeAfter";
 import Infrastructure from "./pages/Infrastructure";

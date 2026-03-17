@@ -32,8 +32,11 @@ export default function Dashboard() {
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Hero */}
       <motion.div {...fade} className="gradient-hero rounded-xl p-8 text-primary-foreground">
-        <p className="text-sm font-medium opacity-80 mb-1">Transformando custo público em eficiência, receita e impacto ambiental.</p>
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">Dashboard Executivo</h1>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-semibold uppercase tracking-wider opacity-80 bg-primary-foreground/15 px-2 py-0.5 rounded">Simulação</span>
+        </div>
+        <h1 className="text-2xl md:text-3xl font-bold mb-1">Dashboard Executivo (Simulação)</h1>
+        <p className="text-sm font-medium opacity-80 mb-4">Visão estratégica para análise e tomada de decisão do município</p>
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-1 bg-primary-foreground/10 rounded-lg p-5 backdrop-blur-sm">
             <p className="text-sm opacity-80">Hoje o município perde:</p>

@@ -4,7 +4,6 @@ import {
   ArrowLeftRight,
   Factory,
   Workflow,
-  Users,
   DollarSign,
   BarChart3,
   Rocket,
@@ -12,12 +11,12 @@ import {
   Clock,
   Settings,
   GraduationCap,
-  MapPin,
   FileText,
   Recycle,
+  Activity,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -31,21 +30,18 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const mainItems = [
+const simulationItems = [
   { title: "Dashboard Executivo", url: "/dashboard", icon: LayoutDashboard },
   { title: "Simulador", url: "/simulador", icon: Calculator },
   { title: "Antes vs Depois", url: "/comparativo", icon: ArrowLeftRight },
   { title: "Infraestrutura", url: "/infraestrutura", icon: Factory },
-  { title: "Operação", url: "/operacao", icon: Workflow },
 ];
 
-const analysisItems = [
-  { title: "Fontes de Receita", url: "/receitas", icon: DollarSign },
+const operationItems = [
+  { title: "Dashboard Operacional", url: "/operacional", icon: Activity },
+  { title: "Operação", url: "/operacao", icon: Workflow },
   { title: "Indicadores (KPIs)", url: "/kpis", icon: BarChart3 },
   { title: "Resultado em 90 Dias", url: "/resultados", icon: Rocket },
-];
-
-const implItems = [
   { title: "Segurança e Risco", url: "/seguranca", icon: Shield },
   { title: "Cronograma", url: "/cronograma", icon: Clock },
   { title: "Implantação", url: "/implantacao", icon: Settings },
@@ -53,17 +49,22 @@ const implItems = [
 ];
 
 const reportItems = [
+  { title: "Fontes de Receita", url: "/receitas", icon: DollarSign },
   { title: "Relatório Executivo", url: "/relatorio", icon: FileText },
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
 
-  const renderGroup = (label: string, items: typeof mainItems) => (
+  const renderGroup = (label: string, items: typeof simulationItems, color?: string) => (
     <SidebarGroup>
-      {!collapsed && <SidebarGroupLabel className="text-sidebar-muted text-xs uppercase tracking-wider">{label}</SidebarGroupLabel>}
+      {!collapsed && (
+        <SidebarGroupLabel className="text-sidebar-muted text-xs uppercase tracking-wider flex items-center gap-2">
+          {color && <span className={`h-2 w-2 rounded-full ${color}`} />}
+          {label}
+        </SidebarGroupLabel>
+      )}
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
@@ -89,8 +90,8 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg gradient-success flex items-center justify-center shrink-0">
+        <Link to="/dashboard" className="flex items-center gap-2 cursor-pointer group">
+          <div className="h-8 w-8 rounded-lg gradient-success flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
             <Recycle className="h-5 w-5 text-sidebar-foreground" />
           </div>
           {!collapsed && (
@@ -99,12 +100,11 @@ export function AppSidebar() {
               <p className="text-[10px] text-sidebar-foreground/60 leading-tight">Gestão de Resíduos Sólidos</p>
             </div>
           )}
-        </div>
+        </Link>
       </SidebarHeader>
       <SidebarContent>
-        {renderGroup("Principal", mainItems)}
-        {renderGroup("Análise", analysisItems)}
-        {renderGroup("Implantação", implItems)}
+        {renderGroup("Simulação / Decisão", simulationItems, "bg-primary-foreground")}
+        {renderGroup("Operação Real", operationItems, "bg-green-400")}
         {renderGroup("Relatório", reportItems)}
       </SidebarContent>
     </Sidebar>
